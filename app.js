@@ -26,15 +26,12 @@
       $('invitation').setAttribute('aria-hidden', 'false');
       $('replay-button').hidden = false;
       storage.set('opened', '1');
-      storage.set('intro-version', '3');
-      if (animated) celebrate();
+      storage.set('intro-version', '4');
+      if (animated) { $('rsvp-button').focus({preventScroll:true}); celebrate(); }
     };
     if (animated) {
-      book.classList.add('unsealing');
-      openingTimer = setTimeout(() => {
-        book.classList.add('opening');
-        openingTimer = setTimeout(finish, 1650);
-      }, 600);
+      book.classList.add('opening');
+      openingTimer = setTimeout(finish, 1850);
     } else {
       book.classList.add('already-open');
       finish();
@@ -45,18 +42,13 @@
     $('confirmed-note').hidden = false;
     $('rsvp-button').textContent = '♡ Presença confirmada';
   }
-  // Existing visitors see this repaired intro once; later visits keep the invitation open.
+  // First visit waits for a click. Returning visitors keep their invitation open.
   const skipIntro = storage.get('confirmed') === '1' ||
-    (storage.get('opened') === '1' && storage.get('intro-version') === '3');
-  if (skipIntro) {
-    showInvitation(false);
-  } else {
-    const startIntro = () => { if (!open) openingTimer = setTimeout(() => showInvitation(true), 1200); };
-    if (document.readyState === 'complete') startIntro();
-    else window.addEventListener('load', startIntro, {once:true});
-  }
+    (storage.get('opened') === '1' && storage.get('intro-version') === '4');
+  if (skipIntro) showInvitation(false);
   updateConfirmed();
   $('open-button').addEventListener('click', () => showInvitation(true));
+  $('cover').addEventListener('click', () => showInvitation(true));
   $('replay-button').addEventListener('click', () => {
     clearTimeout(openingTimer);
     open = false;
@@ -69,10 +61,10 @@
     $('replay-button').hidden = true;
     $('open-button').disabled = false;
     $('book').scrollIntoView({behavior: reducedMotion() ? 'instant' : 'smooth', block:'start'});
-    // Render the closed cover before starting the opening sequence again.
+    // Keep the cover closed until the visitor clicks it again.
     requestAnimationFrame(() => requestAnimationFrame(() => {
       $('book').classList.remove('resetting');
-      showInvitation(true);
+      $('open-button').focus({preventScroll:true});
     }));
   });
   $('rsvp-button').addEventListener('click', () => {
