@@ -1,7 +1,7 @@
 (() => {
   'use strict';
   const $ = (id) => document.getElementById(id);
-  const config = window.INVITE_CONFIG;
+  const config = window.INVITE_CONFIG || {eventId:'mavie-lunna-2027-02-28',appsScriptUrl:''};
   const prefix = config.eventId + ':';
   const storage = {
     get(key) { try { return localStorage.getItem(prefix + key); } catch { return null; } },
@@ -13,25 +13,28 @@
   function showInvitation(animate) {
     if (open) return;
     open = true;
+    clearTimeout(openingTimer);
     const animated = animate && !reducedMotion();
     const book = $('book');
+    $('open-button').disabled = true;
     const finish = () => {
-      book.classList.remove('unsealing');
       book.classList.add('opened');
+      book.classList.remove('unsealing', 'opening');
       $('cover').setAttribute('aria-hidden', 'true');
       $('cover').inert = true;
       $('invitation').inert = false;
       $('invitation').setAttribute('aria-hidden', 'false');
       $('replay-button').hidden = false;
       storage.set('opened', '1');
-      if (animated) {
-        openingTimer = setTimeout(() => { $('rsvp-button').focus({preventScroll:true}); celebrate(); }, 1500);
-      }
+      storage.set('intro-version', '3');
+      if (animated) celebrate();
     };
     if (animated) {
-      $('open-button').disabled = true;
       book.classList.add('unsealing');
-      openingTimer = setTimeout(finish, 650);
+      openingTimer = setTimeout(() => {
+        book.classList.add('opening');
+        openingTimer = setTimeout(finish, 1650);
+      }, 600);
     } else {
       book.classList.add('already-open');
       finish();
@@ -42,14 +45,23 @@
     $('confirmed-note').hidden = false;
     $('rsvp-button').textContent = '♡ Presença confirmada';
   }
-  if (storage.get('opened')) showInvitation(false);
+  // Existing visitors see this repaired intro once; later visits keep the invitation open.
+  const skipIntro = storage.get('confirmed') === '1' ||
+    (storage.get('opened') === '1' && storage.get('intro-version') === '3');
+  if (skipIntro) {
+    showInvitation(false);
+  } else {
+    const startIntro = () => { if (!open) openingTimer = setTimeout(() => showInvitation(true), 1200); };
+    if (document.readyState === 'complete') startIntro();
+    else window.addEventListener('load', startIntro, {once:true});
+  }
   updateConfirmed();
   $('open-button').addEventListener('click', () => showInvitation(true));
   $('replay-button').addEventListener('click', () => {
     clearTimeout(openingTimer);
     open = false;
     $('book').classList.add('resetting');
-    $('book').classList.remove('already-open', 'opened', 'unsealing');
+    $('book').classList.remove('already-open', 'opened', 'unsealing', 'opening');
     $('cover').inert = false;
     $('cover').setAttribute('aria-hidden', 'false');
     $('invitation').inert = true;
