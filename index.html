@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f4c5d6"><meta name="description" content="Uma cartinha especial: venha comemorar o primeiro aninho da Mavie Lunna! 28 de fevereiro, às 19h."><title>Mavie Lunna · Meu primeiro aninho</title><link rel="icon" href="assets/flor.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><script src="config.js" defer></script><script src="app.js" defer></script></head>
+<body>
+<div class="ambient flower f1" aria-hidden="true">✿</div><div class="ambient flower f2" aria-hidden="true">✿</div><div class="ambient flower f3" aria-hidden="true">✿</div>
+<header class="page-header"><span class="tiny-flower">✿</span> UMA FESTA CHEIA DE CARINHO <span class="tiny-flower">✿</span></header>
+<main>
+<div class="book" id="book">
+<article class="invitation" id="invitation" aria-hidden="true" inert>
+<div class="art art-inside" role="img" aria-label="Galinha Pintadinha e seus amigos em um jardim com arco-íris"></div>
+<div class="invitation-body">
+<p class="eyebrow">CÓ CÓ CÓ… TEM FESTINHA!</p>
+<h1>Mavie Lunna</h1><div class="age"><span></span> meu primeiro aninho <span></span></div>
+<p class="invite-copy">Um ano de amor, descobertas e sorrisos.<br>E você faz parte dessa história!</p>
+<p class="special">Vem celebrar comigo?</p>
+<div class="event"><div><span class="event-label">FEVEREIRO</span><strong>28</strong><span class="event-label">2027</span></div><i></i><div><span class="event-label">VAMOS FESTEJAR</span><strong>19<span>h</span></strong><span class="event-label">COM MUITA ALEGRIA</span></div></div>
+<div id="confirmed-note" class="confirmed-note" hidden>♡ Sua presença está confirmada!</div>
+<button class="button primary" id="rsvp-button"><span>♡</span> Confirmar minha presença <span>→</span></button>
+<a class="button secondary" id="maps" href="https://maps.app.goo.gl/qigtXBghjCF3WUon6" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg> Ver localização</a>
+<p class="closing">Espero você para esse dia tão especial! <span>✿</span></p>
+</div></article>
+<section class="cover" id="cover" aria-label="Carta convite da Mavie Lunna">
+<div class="cover-front">
+<div class="art art-cover" role="img" aria-label="Galinha Pintadinha rosa, pintinho e borboleta"></div>
+<div class="cover-content"><p class="eyebrow">TEM UMA CARTINHA PARA VOCÊ</p><h2>Mavie<br><span>Lunna</span></h2><div class="age"><span></span> 1 aninho <span></span></div><div class="envelope" aria-hidden="true"><div class="seal">M<span>♡</span></div></div><p class="cover-copy">Pequena no tamanho.<br>Gigante no amor.</p><button class="button primary" id="open-button">Abrir meu convite <span>↗</span></button><p class="tap-note">feito com carinho, especialmente para você</p></div>
+</div><div class="cover-back" aria-hidden="true">✿</div></section>
+</div>
+<p class="page-footer">28 DE FEVEREIRO <span>✿</span> UM DIA PARA GUARDAR NO CORAÇÃO</p>
+</main>
+<dialog id="rsvp-dialog" aria-labelledby="form-title"><button class="close" id="close-dialog" aria-label="Fechar formulário">×</button><div id="form-view"><span class="dialog-flower" aria-hidden="true">✿</span><p class="eyebrow">VAI SER AINDA MAIS ESPECIAL COM VOCÊ</p><h2 id="form-title">Vamos à festinha?</h2><p class="dialog-copy">Confirme sua presença em um instante.</p><form id="rsvp-form"><label for="guest-name">Seu nome <span>*</span></label><input id="guest-name" name="name" placeholder="Como você se chama?" autocomplete="name" required minlength="2" maxlength="100"><label for="phone">Telefone com DDD <span>*</span></label><input type="tel" id="phone" name="phone" placeholder="(00) 00000-0000" autocomplete="tel" required maxlength="22" inputmode="tel"><div id="companions"></div><button type="button" class="add-person" id="add-person">＋ Adicionar acompanhante</button><p class="privacy">Seus dados serão usados apenas para organizar a festinha e entrar em contato sobre o evento.</p><p id="form-error" role="alert" hidden></p><button class="button primary" id="submit-button" type="submit">Confirmar presença <span>♡</span></button></form></div><div id="success-view" hidden><span class="success-icon">♡</span><p class="eyebrow">JÁ ESTAMOS CONTANDO OS DIAS</p><h2>Oba, você vem!</h2><p>Sua presença foi confirmada.<br>A Mavie espera você para celebrar!</p><a class="button primary" href="https://maps.app.goo.gl/qigtXBghjCF3WUon6" target="_blank" rel="noopener noreferrer">Ver localização <span>↗</span></a><button class="text-button" id="back-invite">Voltar ao convite</button></div></dialog>
+<div id="confetti" aria-hidden="true"></div>
+</body></html>
