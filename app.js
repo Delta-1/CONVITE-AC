@@ -8,17 +8,34 @@
     set(key, value) { try { localStorage.setItem(prefix + key, value); } catch { /* Storage may be unavailable in private browsing. */ } }
   };
   let open = false;
+  let openingTimer;
+  const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
   function showInvitation(animate) {
     if (open) return;
     open = true;
-    if (!animate) $('book').classList.add('already-open');
-    $('book').classList.add('opened');
-    $('cover').setAttribute('aria-hidden', 'true');
-    $('cover').inert = true;
-    $('invitation').inert = false;
-    $('invitation').setAttribute('aria-hidden', 'false');
-    storage.set('opened', '1');
-    if (animate) { setTimeout(() => $('rsvp-button').focus({preventScroll:true}), 1250); }
+    const animated = animate && !reducedMotion();
+    const book = $('book');
+    const finish = () => {
+      book.classList.remove('unsealing');
+      book.classList.add('opened');
+      $('cover').setAttribute('aria-hidden', 'true');
+      $('cover').inert = true;
+      $('invitation').inert = false;
+      $('invitation').setAttribute('aria-hidden', 'false');
+      $('replay-button').hidden = false;
+      storage.set('opened', '1');
+      if (animated) {
+        openingTimer = setTimeout(() => { $('rsvp-button').focus({preventScroll:true}); celebrate(); }, 1500);
+      }
+    };
+    if (animated) {
+      $('open-button').disabled = true;
+      book.classList.add('unsealing');
+      openingTimer = setTimeout(finish, 650);
+    } else {
+      book.classList.add('already-open');
+      finish();
+    }
   }
   function updateConfirmed() {
     if (storage.get('confirmed') !== '1') return;
@@ -28,6 +45,24 @@
   if (storage.get('opened')) showInvitation(false);
   updateConfirmed();
   $('open-button').addEventListener('click', () => showInvitation(true));
+  $('replay-button').addEventListener('click', () => {
+    clearTimeout(openingTimer);
+    open = false;
+    $('book').classList.add('resetting');
+    $('book').classList.remove('already-open', 'opened', 'unsealing');
+    $('cover').inert = false;
+    $('cover').setAttribute('aria-hidden', 'false');
+    $('invitation').inert = true;
+    $('invitation').setAttribute('aria-hidden', 'true');
+    $('replay-button').hidden = true;
+    $('open-button').disabled = false;
+    $('book').scrollIntoView({behavior: reducedMotion() ? 'instant' : 'smooth', block:'start'});
+    // Render the closed cover before starting the opening sequence again.
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      $('book').classList.remove('resetting');
+      showInvitation(true);
+    }));
+  });
   $('rsvp-button').addEventListener('click', () => {
     const confirmed = storage.get('confirmed') === '1';
     $('form-view').hidden = confirmed;
@@ -53,7 +88,7 @@
   });
   function celebrate() {
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    for(let i=0;i<34;i++) { const el=document.createElement('i'); el.className='confetto'; el.style.left=Math.random()*100+'%'; el.style.background=['#eaa6c0','#f3d272','#9ecfcc','#bba1d4'][i%4];el.style.setProperty('--drift',(Math.random()*180-90)+'px');el.style.animationDelay=Math.random()*.6+'s';$('confetti').append(el);setTimeout(()=>el.remove(),4000); }
+    for(let i=0;i<34;i++) { const el=document.createElement('i'); el.className='confetto'; el.style.left=Math.random()*100+'%'; el.style.background=['#ff358a','#ffd447','#3acada','#a77af4'][i%4];el.style.setProperty('--drift',(Math.random()*180-90)+'px');el.style.animationDelay=Math.random()*.6+'s';$('confetti').append(el);setTimeout(()=>el.remove(),4000); }
   }
   $('rsvp-form').addEventListener('submit', async (e) => {
     e.preventDefault();
