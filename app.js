@@ -9,6 +9,7 @@
   };
   let open = false;
   let openingTimer;
+  let cancelPageTurn;
   const reducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
   function showInvitation(animate) {
     if (open) return;
@@ -26,12 +27,16 @@
       $('invitation').setAttribute('aria-hidden', 'false');
       $('replay-button').hidden = false;
       storage.set('opened', '1');
-      storage.set('intro-version', '4');
+      storage.set('intro-version', '5');
       if (animated) { $('rsvp-button').focus({preventScroll:true}); celebrate(); }
     };
     if (animated) {
       book.classList.add('opening');
-      openingTimer = setTimeout(finish, 1850);
+      if (window.InvitationPageTurn) {
+        cancelPageTurn = window.InvitationPageTurn.play($('cover'), book, finish);
+      } else {
+        openingTimer = setTimeout(finish, 1850);
+      }
     } else {
       book.classList.add('already-open');
       finish();
@@ -44,13 +49,14 @@
   }
   // First visit waits for a click. Returning visitors keep their invitation open.
   const skipIntro = storage.get('confirmed') === '1' ||
-    (storage.get('opened') === '1' && storage.get('intro-version') === '4');
+    (storage.get('opened') === '1' && storage.get('intro-version') === '5');
   if (skipIntro) showInvitation(false);
   updateConfirmed();
   $('open-button').addEventListener('click', () => showInvitation(true));
   $('cover').addEventListener('click', () => showInvitation(true));
   $('replay-button').addEventListener('click', () => {
     clearTimeout(openingTimer);
+    if (cancelPageTurn) { cancelPageTurn(); cancelPageTurn = null; }
     open = false;
     $('book').classList.add('resetting');
     $('book').classList.remove('already-open', 'opened', 'unsealing', 'opening');
