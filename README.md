@@ -39,6 +39,6 @@ Execute `node --check app.js` e `node --check config.js`. Confira que o botão a
 
 ## Cena ilustrada e música
 
-O convite usa a arte original como papel, com os textos sobre a ilustração. A abertura de página revela um zoom suave e três personagens transparentes que surgem ao redor da folha. O arquivo `assets/characters.png` é uma releitura gerada com base na referência enviada, em três células horizontais transparentes.
+O convite usa a arte original como papel, com os textos sobre a ilustração. A abertura de página revela um zoom suave e três personagens transparentes que surgem ao redor da folha. O arquivo `assets/characters.webp` é uma releitura gerada com base na referência enviada, em três células horizontais transparentes.
 
 `musicUrl` em `config.js` aguarda o arquivo de áudio do organizador. Enquanto não houver áudio, nenhum controle de música é exibido. Quando configurado, a música começa no clique de abertura, em volume baixo, com botão para pausar ou tocar. Em visitas com o convite já aberto, o visitante usa o botão de música; não há reprodução audível automática ao carregar a página.

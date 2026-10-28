@@ -13,7 +13,8 @@
     play(cover, book, done) {
       const bounds = cover.getBoundingClientRect();
       if (!bounds.width || !bounds.height) { done(); return () => {}; }
-      const width = bounds.width, height = bounds.height;
+      const width = cover.offsetWidth || bounds.width;
+      const height = cover.offsetHeight || bounds.height;
       const count = width < 700 ? 14 : 22;
       const stripWidth = width / count;
       const layer = document.createElement('div');
