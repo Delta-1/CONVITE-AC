@@ -21,7 +21,7 @@
     const finish = () => {
       book.classList.add('opened');
       $('scene').classList.add('revealed');
-      book.classList.remove('unsealing', 'opening');
+      book.classList.remove('unsealing', 'opening', 'css-sheet-opening');
       $('cover').setAttribute('aria-hidden', 'true');
       $('cover').inert = true;
       $('invitation').inert = false;
@@ -36,16 +36,15 @@
       if (window.InvitationPageTurn) {
         cancelPageTurn = window.InvitationPageTurn.play($('cover'), book, finish);
       } else {
-        openingTimer = setTimeout(finish, 1850);
+        openingTimer = setTimeout(finish, 3900);
       }
     } else {
       book.classList.add('already-open');
       finish();
     }
   }
-  // First visit waits for a click. Returning visitors keep their invitation open.
-  const skipIntro = storage.get('opened') === '1' && storage.get('intro-version') === '8';
-  if (skipIntro) showInvitation(false);
+  // Always show the closed cover, including repeat visits and old saved-open states.
+  // Opening requires a click; replay also returns to this same closed state.
   const openFromGesture = () => { startMusic(); showInvitation(true); };
   $('open-button').addEventListener('click', openFromGesture);
   $('cover').addEventListener('click', openFromGesture);
@@ -55,7 +54,7 @@
     open = false;
     $('scene').classList.remove('revealed');
     $('book').classList.add('resetting');
-    $('book').classList.remove('already-open', 'opened', 'unsealing', 'opening');
+    $('book').classList.remove('already-open', 'opened', 'unsealing', 'opening', 'css-sheet-opening');
     $('cover').inert = false;
     $('cover').setAttribute('aria-hidden', 'false');
     $('invitation').inert = true;

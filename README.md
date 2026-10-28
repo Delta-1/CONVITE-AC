@@ -1,6 +1,6 @@
 # Convite · Mavie Lunna, 1 aninho
 
-Convite responsivo da Galinha Pintadinha rosa, com a arte fornecida, carta que abre da direita para a esquerda, lembrança da abertura no navegador, confirmação de presença pelo WhatsApp e localização no Google Maps.
+Convite responsivo da Galinha Pintadinha rosa, com a arte fornecida, carta que abre da direita para a esquerda, capa fechada em cada acesso, confirmação de presença pelo WhatsApp e localização no Google Maps.
 
 **Festa:** 28/02/2027, às 19h.
 
@@ -31,7 +31,7 @@ A integração anterior com Google Sheets fica desativada. O arquivo `google-app
 - `assets/referencia.png`: arte original enviada para o convite.
 - `google-apps-script/Code.gs`: receptor validado e gravação na planilha.
 
-A lembrança da abertura vale para o mesmo navegador/dispositivo. Limpar os dados do site ou trocar de aparelho volta a mostrar a carta fechada. Não são gravados nomes ou telefones no armazenamento local; apenas o estado de abertura.
+A capa aparece fechada em cada acesso e abre por clique, mesmo para quem já tinha visitado o site. Não são gravados nomes ou telefones no armazenamento local.
 
 ## Verificação
 
@@ -39,6 +39,6 @@ Execute `node --check app.js` e `node --check config.js`. Confira que o botão a
 
 ## Cena ilustrada e música
 
-O convite usa a arte original como papel, com os textos sobre a ilustração. A abertura de página revela um zoom suave e três personagens transparentes que surgem ao redor da folha. O arquivo `assets/characters.webp` é uma releitura gerada com base na referência enviada, em três células horizontais transparentes.
+O convite usa a arte original como papel, com os textos sobre a ilustração. A abertura da folha inteira revela um zoom suave e três personagens transparentes que surgem ao redor da folha. O arquivo `assets/characters.webp` é uma releitura gerada com base na referência enviada, em três células horizontais transparentes.
 
 `musicUrl` em `config.js` aguarda o arquivo de áudio do organizador. Enquanto não houver áudio, nenhum controle de música é exibido. Quando configurado, a música começa no clique de abertura, em volume baixo, com botão para pausar ou tocar. Em visitas com o convite já aberto, o visitante usa o botão de música; não há reprodução audível automática ao carregar a página.
