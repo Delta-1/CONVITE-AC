@@ -16,7 +16,7 @@ Alternativa sem Actions: em Settings → Pages selecione **Deploy from a branch 
 
 A confirmação agora abre a conversa do organizador com uma mensagem pronta. O convidado toca em Enviar no WhatsApp. O site não pede nome, telefone ou acompanhantes e não marca a presença como confirmada apenas porque o link foi aberto.
 
-Defina `whatsappNumber` em `config.js` com código do país + DDD + telefone, somente dígitos. A publicação desta alteração aguarda o organizador informar o número correto. Não use um telefone de exemplo ou de outro projeto.
+Defina `whatsappNumber` em `config.js` com código do país + DDD + telefone, somente dígitos. Número configurado: +55 (68) 99929-2317, informado pelo organizador.
 
 A integração anterior com Google Sheets fica desativada. O arquivo `google-apps-script/Code.gs` foi preservado como histórico e não é chamado pelo site.
 
@@ -31,8 +31,8 @@ A integração anterior com Google Sheets fica desativada. O arquivo `google-app
 - `assets/referencia.png`: arte original enviada para o convite.
 - `google-apps-script/Code.gs`: receptor validado e gravação na planilha.
 
-A lembrança da abertura vale para o mesmo navegador/dispositivo. Limpar os dados do site ou trocar de aparelho volta a mostrar a carta fechada. Não são gravados nomes ou telefones no armazenamento local; apenas o estado e o ID de envio.
+A lembrança da abertura vale para o mesmo navegador/dispositivo. Limpar os dados do site ou trocar de aparelho volta a mostrar a carta fechada. Não são gravados nomes ou telefones no armazenamento local; apenas o estado de abertura.
 
 ## Verificação
 
-Execute `node --check app.js` e `node --check config.js`. O teste final da gravação depende da implantação do Apps Script e da configuração de sua URL. Os arquivos internos e o código Apps Script são excluídos do artefato do Pages pelo workflow.
+Execute `node --check app.js` e `node --check config.js`. Confira que o botão abre a conversa correta e mantém a mensagem de confirmação pronta para o convidado enviar. Os arquivos internos e o código Apps Script são excluídos do artefato do Pages pelo workflow.
