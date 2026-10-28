@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="pt-BR">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6388a"><meta name="description" content="Uma cartinha especial: venha comemorar o primeiro aninho da Mavie Lunna! 28 de fevereiro, às 19h."><title>Mavie Lunna · Meu primeiro aninho</title><link rel="icon" href="assets/flor.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css?v=10"><script src="config.js?v=8" defer></script><script src="page-turn.js?v=10" defer></script><script src="app.js?v=10" defer></script></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6388a"><meta name="description" content="Uma cartinha especial: venha comemorar o primeiro aninho da Mavie Lunna! 28 de fevereiro, às 19h."><title>Mavie Lunna · Meu primeiro aninho</title><link rel="icon" href="assets/flor.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css?v=11"><script src="config.js?v=8" defer></script><script src="page-turn.js?v=10" defer></script><script src="app.js?v=11" defer></script></head>
 <body>
 <audio id="party-audio" loop preload="none"></audio>
 <button class="music-toggle" id="music-toggle" type="button" aria-label="Tocar música" hidden>♫ <span id="music-label">Tocar música</span></button>
@@ -18,11 +18,7 @@
 
 <p class="invite-copy">Um aninho de descobertas e muito amor.<br><strong>Vem festejar comigo!</strong></p>
 <div class="event"><div><span class="event-label">FEVEREIRO</span><strong>28</strong><span class="event-label">2027</span></div><i></i><div><span class="event-label">ÀS</span><strong>19<span>h</span></strong><span class="event-label">ESPERAMOS VOCÊ</span></div></div>
-<details class="gift-guide">
-<summary><span aria-hidden="true">🎁</span> Sugestões de presente <span class="gift-chevron" aria-hidden="true">⌄</span></summary>
-<div class="gift-content"><p>Sua presença é o meu melhor presente!<br>Mas, se quiser me mimar, aqui vão meus tamanhos:</p>
-<dl><div><dt>Roupinhas</dt><dd>1 a 2 anos</dd></div><div><dt>Calçados</dt><dd>19 a 20</dd></div></dl></div>
-</details>
+<button type="button" class="gift-button" id="gifts-button" aria-haspopup="dialog"><span aria-hidden="true">🎁</span> Sugestões de presente <span aria-hidden="true">＋</span></button>
 <a class="button primary whatsapp-rsvp" id="rsvp-button" target="_blank" rel="noopener noreferrer" aria-describedby="rsvp-help"><span aria-hidden="true">♡</span> Confirmar presença <span aria-hidden="true">↗</span></a>
 <p class="rsvp-help" id="rsvp-help">Confirme pelo WhatsApp, sem preencher formulário.</p>
 <p class="rsvp-error" id="rsvp-error" role="status" hidden></p>
@@ -38,5 +34,6 @@
 <p class="page-footer">28 DE FEVEREIRO <span>✿</span> UM DIA PARA GUARDAR NO CORAÇÃO</p>
 </main>
 
+<dialog class="gift-dialog" id="gift-dialog" aria-labelledby="gift-title"><button type="button" class="gift-close" id="gift-close" aria-label="Fechar sugestões de presente">×</button><span class="gift-flower" aria-hidden="true">✿</span><h2 id="gift-title">Um mimo para a Mavie</h2><p>Sua presença é o meu melhor presente!<br>Mas, se quiser me mimar, aqui vão meus tamanhos:</p><dl><div><dt>Roupinhas</dt><dd>1 a 2 anos</dd></div><div><dt>Calçados</dt><dd>19 a 20</dd></div></dl><button type="button" class="button primary" id="gift-done">Voltar ao convite ♡</button></dialog>
 <div id="confetti" aria-hidden="true"></div>
 </body></html>

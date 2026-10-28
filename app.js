@@ -7,6 +7,19 @@
     get(key) { try { return localStorage.getItem(prefix + key); } catch { return null; } },
     set(key, value) { try { localStorage.setItem(prefix + key, value); } catch { /* Storage may be unavailable in private browsing. */ } }
   };
+  function fitMobileSheet() {
+    const book = $('book');
+    if (window.innerWidth > 700) { book.style.setProperty('--scene-fit', '1'); return; }
+    const scene = $('scene');
+    const spacing = getComputedStyle(scene);
+    const available = scene.clientHeight - parseFloat(spacing.paddingTop) - parseFloat(spacing.paddingBottom);
+    const scale = Math.min(1, Math.max(0.1, available / book.offsetHeight));
+    book.style.setProperty('--scene-fit', String(scale));
+  }
+  fitMobileSheet();
+  window.addEventListener('resize', () => requestAnimationFrame(fitMobileSheet));
+  if (window.visualViewport) window.visualViewport.addEventListener('resize', () => requestAnimationFrame(fitMobileSheet));
+  if (document.fonts) document.fonts.ready.then(fitMobileSheet);
   let open = false;
   let openingTimer;
   let cancelPageTurn;
@@ -67,6 +80,15 @@
       $('book').classList.remove('resetting');
       $('open-button').focus({preventScroll:true});
     }));
+  });
+  const giftDialog = $('gift-dialog');
+  $('gifts-button').addEventListener('click', () => giftDialog.showModal());
+  $('gift-close').addEventListener('click', () => giftDialog.close());
+  $('gift-done').addEventListener('click', () => giftDialog.close());
+  giftDialog.addEventListener('click', (event) => {
+    if (event.target !== giftDialog) return;
+    const rect = giftDialog.getBoundingClientRect();
+    if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) giftDialog.close();
   });
   const audio = $('party-audio');
   const musicButton = $('music-toggle');

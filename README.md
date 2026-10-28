@@ -42,3 +42,7 @@ Execute `node --check app.js` e `node --check config.js`. Confira que o botão a
 O convite usa a arte original como papel, com os textos sobre a ilustração. A abertura da folha inteira revela um zoom suave e três personagens transparentes que surgem ao redor da folha. O arquivo `assets/characters.webp` é uma releitura gerada com base na referência enviada, em três células horizontais transparentes.
 
 `musicUrl` em `config.js` aguarda o arquivo de áudio do organizador. Enquanto não houver áudio, nenhum controle de música é exibido. Quando configurado, a música começa no clique de abertura, em volume baixo, com botão para pausar ou tocar. Em visitas com o convite já aberto, o visitante usa o botão de música; não há reprodução audível automática ao carregar a página.
+
+## Tela única no celular
+
+Em telas de até 700 px, a folha cabe no espaço disponível usando largura e altura da tela. O fundo e o rodapé não criam rolagem. Presentes abrem em um diálogo separado com rolagem própria apenas se necessária. O interior usa `assets/interior.webp`, diferente da arte da capa.
