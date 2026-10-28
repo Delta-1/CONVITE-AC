@@ -22,7 +22,7 @@ A integração anterior com Google Sheets fica desativada. O arquivo `google-app
 
 ## Sugestões de presente
 
-Área expansível no convite com roupas de 2 a 3 anos e calçados de 20 a 23.
+Área expansível no convite com roupas de 1 a 2 anos e calçados de 19 a 20.
 
 ## Arquivos
 
