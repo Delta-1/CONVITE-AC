@@ -20,6 +20,7 @@
     $('open-button').disabled = true;
     const finish = () => {
       book.classList.add('opened');
+      $('scene').classList.add('revealed');
       book.classList.remove('unsealing', 'opening');
       $('cover').setAttribute('aria-hidden', 'true');
       $('cover').inert = true;
@@ -27,7 +28,7 @@
       $('invitation').setAttribute('aria-hidden', 'false');
       $('replay-button').hidden = false;
       storage.set('opened', '1');
-      storage.set('intro-version', '5');
+      storage.set('intro-version', '8');
       if (animated) { $('rsvp-button').focus({preventScroll:true}); celebrate(); }
     };
     if (animated) {
@@ -43,14 +44,16 @@
     }
   }
   // First visit waits for a click. Returning visitors keep their invitation open.
-  const skipIntro = storage.get('opened') === '1' && storage.get('intro-version') === '5';
+  const skipIntro = storage.get('opened') === '1' && storage.get('intro-version') === '8';
   if (skipIntro) showInvitation(false);
-  $('open-button').addEventListener('click', () => showInvitation(true));
-  $('cover').addEventListener('click', () => showInvitation(true));
+  const openFromGesture = () => { startMusic(); showInvitation(true); };
+  $('open-button').addEventListener('click', openFromGesture);
+  $('cover').addEventListener('click', openFromGesture);
   $('replay-button').addEventListener('click', () => {
     clearTimeout(openingTimer);
     if (cancelPageTurn) { cancelPageTurn(); cancelPageTurn = null; }
     open = false;
+    $('scene').classList.remove('revealed');
     $('book').classList.add('resetting');
     $('book').classList.remove('already-open', 'opened', 'unsealing', 'opening');
     $('cover').inert = false;
@@ -65,6 +68,37 @@
       $('book').classList.remove('resetting');
       $('open-button').focus({preventScroll:true});
     }));
+  });
+  const audio = $('party-audio');
+  const musicButton = $('music-toggle');
+  let musicReady = false;
+  function syncMusicButton() {
+    const playing = !audio.paused;
+    $('music-label').textContent = playing ? 'Pausar música' : 'Tocar música';
+    musicButton.setAttribute('aria-label', playing ? 'Pausar música' : 'Tocar música');
+    musicButton.setAttribute('aria-pressed', playing ? 'true' : 'false');
+  }
+  if (typeof config.musicUrl === 'string' && config.musicUrl.trim()) {
+    audio.src = config.musicUrl;
+    audio.volume = 0.35;
+    musicReady = true;
+    musicButton.hidden = false;
+    audio.addEventListener('play', syncMusicButton);
+    audio.addEventListener('pause', syncMusicButton);
+    audio.addEventListener('error', () => {
+      musicReady = false;
+      $('music-label').textContent = 'Música indisponível';
+      musicButton.disabled = true;
+      musicButton.setAttribute('aria-label', 'Música indisponível');
+    });
+  }
+  function startMusic() {
+    if (!musicReady || !audio.paused) return;
+    audio.play().then(syncMusicButton).catch(syncMusicButton);
+  }
+  musicButton.addEventListener('click', () => {
+    if (!musicReady) return;
+    if (audio.paused) startMusic(); else audio.pause();
   });
   // A normal link opens WhatsApp on mobile and WhatsApp Web on desktop.
   // Opening the conversation never means the guest has sent their confirmation.

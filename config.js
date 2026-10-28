@@ -3,5 +3,6 @@
 window.INVITE_CONFIG = Object.freeze({
   whatsappNumber: '5568999292317',
   whatsappMessage: 'Olá! Quero confirmar minha presença no aniversário de 1 aninho da Mavie Lunna, dia 28/02, às 19h. 🎉💖',
+  musicUrl: '', // Aguardando o áudio enviado pelo organizador.
   eventId: 'mavie-lunna-2027-02-28'
 });

@@ -1,19 +1,23 @@
 <!doctype html>
 <html lang="pt-BR">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6388a"><meta name="description" content="Uma cartinha especial: venha comemorar o primeiro aninho da Mavie Lunna! 28 de fevereiro, às 19h."><title>Mavie Lunna · Meu primeiro aninho</title><link rel="icon" href="assets/flor.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css?v=7"><script src="config.js?v=6" defer></script><script src="page-turn.js?v=5" defer></script><script src="app.js?v=7" defer></script></head>
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f6388a"><meta name="description" content="Uma cartinha especial: venha comemorar o primeiro aninho da Mavie Lunna! 28 de fevereiro, às 19h."><title>Mavie Lunna · Meu primeiro aninho</title><link rel="icon" href="assets/flor.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css?v=8"><script src="config.js?v=8" defer></script><script src="page-turn.js?v=5" defer></script><script src="app.js?v=8" defer></script></head>
 <body>
-<div class="ambient flower f1" aria-hidden="true">✿</div><div class="ambient flower f2" aria-hidden="true">✿</div><div class="ambient flower f3" aria-hidden="true">✿</div>
-<header class="page-header"><span class="tiny-flower">✿</span> UMA FESTA CHEIA DE CARINHO <span class="tiny-flower">✿</span></header>
-<main>
+<audio id="party-audio" loop preload="none"></audio>
+<button class="music-toggle" id="music-toggle" type="button" aria-label="Tocar música" hidden>♫ <span id="music-label">Tocar música</span></button>
+<div class="sky-sparkles" aria-hidden="true"><i>✦</i><i>✧</i><i>✦</i><i>✧</i></div>
+<header class="page-header">UM ANINHO DE AMOR <span>♡</span> MAVIE LUNNA</header>
+<main class="scene" id="scene">
+<div class="character hen" aria-hidden="true"><div class="character-sprite"></div></div>
+<div class="character chick" aria-hidden="true"><div class="character-sprite"></div></div>
+<div class="character butterfly" aria-hidden="true"><div class="character-sprite"></div></div>
 <div class="book" id="book">
 <article class="invitation" id="invitation" aria-hidden="true" inert>
-<div class="art art-inside" role="img" aria-label="Galinha Pintadinha e seus amigos em um jardim com arco-íris"></div>
+<div class="paper-heading"><h1>Mavie Lunna</h1><p>meu primeiro aninho</p></div>
+
 <div class="invitation-body">
-<p class="eyebrow">CÓ CÓ CÓ… TEM FESTINHA!</p>
-<h1>Mavie Lunna</h1><div class="age"><span></span> meu primeiro aninho <span></span></div>
-<p class="invite-copy">Um ano de amor, descobertas e sorrisos.<br>E você faz parte dessa história!</p>
-<p class="special">Vem celebrar comigo?</p>
-<div class="event"><div><span class="event-label">FEVEREIRO</span><strong>28</strong><span class="event-label">2027</span></div><i></i><div><span class="event-label">VAMOS FESTEJAR</span><strong>19<span>h</span></strong><span class="event-label">COM MUITA ALEGRIA</span></div></div>
+
+<p class="invite-copy">Um aninho de descobertas e muito amor.<br><strong>Vem festejar comigo!</strong></p>
+<div class="event"><div><span class="event-label">FEVEREIRO</span><strong>28</strong><span class="event-label">2027</span></div><i></i><div><span class="event-label">ÀS</span><strong>19<span>h</span></strong><span class="event-label">ESPERAMOS VOCÊ</span></div></div>
 <details class="gift-guide">
 <summary><span aria-hidden="true">🎁</span> Sugestões de presente <span class="gift-chevron" aria-hidden="true">⌄</span></summary>
 <div class="gift-content"><p>Sua presença é o meu melhor presente!<br>Mas, se quiser me mimar, aqui vão meus tamanhos:</p>
@@ -27,8 +31,7 @@
 </div></article>
 <section class="cover" id="cover" aria-label="Capa do convite da Mavie Lunna">
 <div class="cover-front">
-<div class="art art-cover" role="img" aria-label="Galinha Pintadinha rosa, pintinho e borboleta"></div>
-<div class="cover-content"><p class="eyebrow">VOCÊ RECEBEU UM CONVITE ESPECIAL</p><h2>Mavie<br><span>Lunna</span></h2><div class="age"><span></span> 1 aninho <span></span></div><div class="cover-medallion" aria-hidden="true"><span>✿</span><strong>1</strong><small>ANINHO</small></div><p class="cover-copy">Pequena no tamanho.<br>Gigante no amor.</p><button class="button primary" id="open-button">Abrir meu convite <span>→</span></button><p class="tap-note">Toque na capa para abrir ♡</p></div>
+<div class="cover-content"><div class="cover-title"><h2>Mavie Lunna</h2><p>meu primeiro aninho</p></div><div class="cover-letter"><p class="eyebrow">UMA SURPRESA ESPECIAL PARA VOCÊ</p><div class="letter-seal" aria-hidden="true">M<span>♡</span></div><p class="cover-copy">Um pedacinho do meu mundo,<br>com muito carinho, para você.</p><button class="button primary" id="open-button">Abrir meu convite <span>♡</span></button><p class="tap-note">Toque e deixe a magia acontecer</p></div></div>
 </div><div class="cover-back" aria-hidden="true"><div class="inside-cover-mark"><span>✿</span><em>Feito de amor,<br>para celebrar com você.</em><small>MAVIE LUNNA · 1 ANINHO</small></div></div></section>
 </div>
 <button type="button" class="replay-button" id="replay-button" hidden>↶ Ver a capa novamente</button>
